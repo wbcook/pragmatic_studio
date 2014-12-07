@@ -1,10 +1,16 @@
 # A fundraising app that tracks the funding of various odd projects.
-cattle = "Project Cattle"
-cattle_funding = 1_000
+cattle = "cattle"
+cattle_funds = 1000
+wheels = "wheels"
+wheels_funds = 525
+watermelons = "watermelons"
+watermelons_funds = 1250
+alpacas = "alpacas"
+alpacas_funds = 750
 
-puts "#{ cattle } has $#{ cattle_funding} in funding."
-
-wheels = "Project Wheels"
-watermelons = "Project Watermelons"
-
-puts "Projects:\n\t#{ cattle }\n\t#{ wheels }\n\t#{ watermelons }"
+print "Projects".center(20, '.')
+puts "Funding".center(20, '.')
+puts "#{ cattle.capitalize } has funding of #{ cattle_funds }."
+puts "#{ wheels.upcase } has funding of #{ wheels_funds }."
+puts "#{ watermelons.capitalize } has funding of #{ watermelons_funds }.".center(45, '*')
+puts "#{ alpacas.capitalize.ljust(25, '.') } has funding of #{ alpacas_funds }."
