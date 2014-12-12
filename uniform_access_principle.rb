@@ -1,4 +1,4 @@
-# A class that models books in a collection.
+# A class that demonstrates the uniform access principle of attributes in classes.
 class BookInStock
   attr_reader :isbn
   attr_accessor :price
