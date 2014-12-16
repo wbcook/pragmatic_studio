@@ -1,10 +1,12 @@
 # A fundraising app that tracks the funding of various odd projects.
 class Project
-  def initialize(name="project", funds=0, expire=30)
-    @name, @funds, @expire = name.capitalize, funds, expire
+  attr_reader :funds, :goal, :expire
+  attr_accessor :name
+  def initialize(name="project", funds=0, goal=25, expire=30)
+    @name, @funds, @goal, @expire = name.capitalize, funds, goal, expire
   end
   def to_s
-    "#{ @name } has $#{ @funds } and expires in #{ @expire } days."
+    "#{ @name } has $#{ @funds }, $#{difference} to go, and expires in #{ @expire } days."
   end
   def loan
     @funds += 25
@@ -14,19 +16,23 @@ class Project
     @expire -= 1
     puts "#{@name} expires soon, make a loan today!!" if @expire < 5
   end
+  def name=(new_name)
+    @name = new_name.capitalize
+  end
+  def difference
+    @goal - @funds
+  end
+
 end
 
-wheels = Project.new( "wheels" )
-watermelons = Project.new( "watermelons", 725, 5)
-cows = Project.new( "cows", 425 )
-alpacas = Project.new( "alpacas", 875 )
-puts "Welcome".center(45, '*')
-wheels.loan
+wheels = Project.new( "wheels", 250, 1000, 25 )
+watermelons = Project.new( "watermelons", 500, 1250, 4)
+alpacas = Project.new( "alpacas", 725, 2000, 12 )
+
 wheels.loan
 watermelons.expirer
-puts "Projects".center(45, '*')
+wheels.name = "wheelz"
 puts wheels
 puts watermelons
-puts cows
 puts alpacas
 puts "Fundraising".center(45, '*')
