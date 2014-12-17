@@ -25,14 +25,18 @@ class Project
 
 end
 
+# Output goes here...
 wheels = Project.new( "wheels", 250, 1000, 25 )
 watermelons = Project.new( "watermelons", 500, 1250, 4)
-alpacas = Project.new( "alpacas", 725, 2000, 12 )
-
-wheels.loan
-watermelons.expirer
-wheels.name = "wheelz"
-puts wheels
-puts watermelons
-puts alpacas
+alpacas = Project.new( "alpacas", 1975, 2000, 12 )
+projects = [wheels, watermelons, alpacas]
+puts "There are #{projects.size} projects:"
+projects. each do |project|
+  project.loan
+  project.expirer
+  puts project unless project.difference <= 0
+  puts "#{project.name} is fully funded with #{project.funds}, hooray!" if project.difference <= 0
+end
 puts "Fundraising".center(45, '*')
+
+# EOF
