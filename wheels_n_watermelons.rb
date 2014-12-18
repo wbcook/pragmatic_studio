@@ -1,4 +1,5 @@
-# A fundraising app that tracks the funding of various odd projects.
+# A fundraising app that tracks the funding of various odd projects. Now with encapsulation
+# and a Fundraising class to manage lists of proejects and their collections.
 class Project
   attr_reader :funds, :goal, :expire
   attr_accessor :name
@@ -22,21 +23,39 @@ class Project
   def difference
     @goal - @funds
   end
+end
 
+class Fundraiser
+  def initialize(title)
+    @title = title
+    @projects = []
+  end
+  def add_project(project)
+    @projects.push(project)
+  end
+  def collect
+    puts @projects
+    @projects.each do |project|
+      project.loan
+      project.expirer
+    end
+    @projects.each do |project|
+      puts project unless project.difference <= 0
+      puts "#{project.name} is fully funded with $#{project.funds}, hooray!" if project.difference <= 0
+    end
+    puts "#{@title}".center(45, '*')
+  end
 end
 
 # Output goes here...
 wheels = Project.new( "wheels", 250, 1000, 25 )
 watermelons = Project.new( "watermelons", 500, 1250, 4)
 alpacas = Project.new( "alpacas", 1975, 2000, 12 )
-projects = [wheels, watermelons, alpacas]
-puts "There are #{projects.size} projects:"
-projects. each do |project|
-  project.loan
-  project.expirer
-  puts project unless project.difference <= 0
-  puts "#{project.name} is fully funded with #{project.funds}, hooray!" if project.difference <= 0
-end
-puts "Fundraising".center(45, '*')
+
+agriculture = Fundraiser.new("Agriculture")
+agriculture.add_project(wheels)
+agriculture.add_project(watermelons)
+agriculture.add_project(alpacas)
+agriculture.collect
 
 # EOF
